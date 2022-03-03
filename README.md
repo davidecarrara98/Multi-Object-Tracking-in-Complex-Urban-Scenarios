@@ -1,7 +1,11 @@
 # Multi Object Tracking in Complex Urban Scenarios - Project Course in Mathematical Modelling
 
 <p align="left">
-    <img src="https://i.imgur.com/mPb3Qbd.gif" width="180" alt="Politecnico di Milano"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156656541-b67bae2f-84c6-4e3e-bb6f-cfbc79a1f1ea.png" width="180" alt="Politecnico di Milano"/>
+</p>
+
+<p align="left">
+    <img src="https://user-images.githubusercontent.com/65012600/156656541-b67bae2f-84c6-4e3e-bb6f-cfbc79a1f1ea.png" width="180" alt="Politecnico di Milano"/>
 </p>
 
 ## Overview
