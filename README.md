@@ -1,6 +1,6 @@
 # Multi Object Tracking in Complex Urban Scenarios - Project Course in Mathematical Modelling
 
-<p align="center">
+<p align="left">
     <img src="https://i.imgur.com/mPb3Qbd.gif" width="180" alt="Politecnico di Milano"/>
 </p>
 
@@ -9,7 +9,7 @@
 Consider the scenario in which advertisement is used to attract users on an ecommerce website and the users, after the purchase of the first unit of a consumable item, will buy additional units of the same item in future. The goal is to find the best joint bidding and pricing strategy taking into account future purchases.
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/91596609/140611633-49b0e7a4-e293-464a-9d77-420f0947cb33.png" width="400" alt="Scenario"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156656541-b67bae2f-84c6-4e3e-bb6f-cfbc79a1f1ea.png" width="400" alt="Scenario"/>
 </p>
 
 
