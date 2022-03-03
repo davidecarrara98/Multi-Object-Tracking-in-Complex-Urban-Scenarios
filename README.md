@@ -12,43 +12,77 @@ Accurate tracking in complex urban scenarios is crucial for safety applications 
 Despite a well-established theoretical framework for object tracking, various challenges need to be addressed in a real context, including sensor noise, occlusions and asynchronous measures from multiple sensor.
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/65012600/156662571-94045f37-6ab2-41c2-b989-3fb911840af1.png" width="400" alt="Scenario"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156663487-9634b5a5-c8d9-46d0-bf83-b270ec062e1d.png" width="400" alt="Scenario"/>
 </p>
 
 
 Viscando uses proprietary stereovision sensors to extract detailed traffic movement information in critical urban settings, and algorithms to produce insights on mobility risks, communicate real-time safety information and study traffic scenarios and behavior models. One key feature of these vision tools is the ability to correctly identify and locate objects, and track their movement in consecutive measurements or partially overlapping views. The aim of the present work is to provide an algorithm to unify detections into tracks, with a focus on accuracy and smoothness of the output, as well as providing a flexible implementation that may easily be modified and re-used.
 
-## General Problem
+## Dataset
 
-* Formulate the objective function when assuming that, once a user makes a purchase with a price p, then the ecommerce will propose the same price p to future visits of the same user and this user will surely buy the item. The revenue function must take into account the cost per click, while there is no budget constraint. Provide an algorithm to find the best joint bidding/pricing strategy and describe its complexity in the number of values of the bids and prices available (assume here that the values of the parameters are known). In the following Steps, assume that the number of bid values are 10 as well as the number of price values.
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/91596609/140612057-5eb1c15b-5ae1-4c27-9de4-1d9f770465fc.jpg"/>
-</p>
-
-## Pricing (P3, P4)
-
-* Consider the case in which the bid is fixed and learn in online fashion the best pricing strategy when the algorithm does not discriminate among the customers’ classes (and therefore the algorithm works with aggregate data). Assume that the number of daily clicks and the daily cost per click are known. Adopt both an upper-confidence bound approach and a Thompson-sampling approach and compare their performance.
+* Provided data is a collection of information from 4 stereovision sensors, with detections corresponding to approximately 750 frames or one minute of activity, of a roundabout in Kolliken, Switzerland. Data has been previously processed to provide points in 3D as centers of detected objects, and bounding boxes containing those objects. In the particular case, the data was collected in Switzerland where video collection for development purposes was not prohibited at the time of collection. Collected video (consisting of image frames) is solely used for research and improvement of object detection and tracking algorithms.
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/91596609/140612377-968b435c-b039-429b-9c65-08aabab3495a.jpg" width="850" alt="princing no seasonal"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156665237-90994fc6-a4b6-403c-806f-52eaa0b17128.png" width="300" alt="Chalmers"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156665317-3f22d3f8-8f50-4341-b1e9-4660e2004038.png" width="300" alt="Viscando"/>
 </p>
 
-* Do the same as the step before when instead a context-generation approach is adopted to identify the classes of customers and adopt a potentially different pricing strategy per class. In doing that, evaluate the performance of the pricing strategies in the different classes only at the optimal solution (e.g., if prices that are not optimal for two customers’ classes provide different performance, you do not split the contexts). Let us remark that no discrimination of the customers’ classes is performed at the advertising level.
+
+## Main Challenges and Solutions
+
+* It can happen that an object detected in a certain frame is occluded in the following ones, resulting in uncertainties about the position of the object. In addition to this, the sensors may fail in associating only one detection per frame to an object. The problem of multiple detections is very common in the data set, and can cause several tracks to be associated to a single object. It is thus important to understand which detections to retain.
+
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/91596609/140612474-d7c29deb-e6f2-464c-9792-da7db7a803c2.jpg" width="850" alt="princing no seasonal"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156666012-e4883c3d-ea7a-4b48-bf65-7f18f87a6c5f.png" width="300" alt="Multiple"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156666142-a7fc0e4f-c246-4cdc-b5c2-350e040bce67.png" width="300" alt="Occlusion"/>
 </p>
 
-## Bidding (P5)
+* A first solution to the problem of occlusion and multiple detections was found by eliminating detections from areas where sensors could not be considered reliable. This areas differ for each sensor, and usually depend on the presence of obstacle or on the distance from the sensor itself. The detections in zones indicated in the following pictures are removed from the dataset, considering the fact that they are always better captured from a better positioned sensor.
 
-* Consider the case in which the prices are fixed and learn in online fashion the best bidding strategy when the algorithm does not discriminate among the customers’ classes. Assume that the conversion probability is known.
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/91596609/140612545-98ae55e3-71e2-4ada-949b-7ef2ea599e39.png" width="450" alt="princing no seasonal"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156666738-8361ed8a-0cd9-42d3-b98d-7f081c5eb788.png" width="619" alt="princing no seasonal"/>
+</p>
+* A following minor tweak was found by appliying an horizontal and then radial transformation on the detections provided by the third sensor. The transformation was discovered by another group working on the same dataset but with different goals, and slightly improved our results.
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/65012600/156667675-5c3ad6dd-b636-418c-b770-73705ce67914.png" width="417" alt="princing no seasonal"/>
 </p>
 
-## Pricing & Bidding (P6, P7)
+* Lastly, we implemented a rough separation of the surfaces belonging to pavement and road, in order to distinguish between detections likely related to pedestrians and thw ones originated by vehicles. This approach can also be useful for a posteriori analysis of curves
+
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/65012600/156668130-4ecdb5ac-5c67-4212-adf0-87f0ae67f6c1.png" width="417" alt="princing no seasonal"/>
+</p>
+
+## The Tracker
+
+The tracker represents the main part of the algorithm, which receives as input all the accepted detections and returns the tracks connecting the same object across the frames.
+The main protagonist of the tracker is the Kalman Filter, which is used to predicted the next steps of a track from the previous position and is able to filter the noise due to errors in the detections. Its tuning and building consists of an important part of the project.
+
+* At first detections from different cameras are joined according to an internal clock, considering as synchronous detections collected in an interval of 0.08 seconds. IN order to join the detections related to the same object from different sensors, we center a gaussian distribution in each object, using the bounding box to determine covariance axis, and compute the probability of representing the same object for each couple of detections.
+
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/65012600/156668934-8c202d9f-d24d-450a-8581-94ef2192dc53.png" width="488" alt="princing no seasonal"/>
+</p>
+
+* For each detection, we compute the distance with the last instance of every track. This distance is given by the weighted sum of euclidean distance and of 1 - Intersection over Union of the bounding boxes. The latter is particularly useful during the first stage of movement, where the Kalman Filter has not yet converged and the bounding boxes provide a good intuition of the trajectory.
+
+
+<p align="center">
+    <img src="https://user-images.githubusercontent.com/65012600/156669753-73b6853b-7de1-481e-9a4a-199878f54fbf.png" width="617" alt="bound box"/>
+</p>
+
+* The association between the detections and tracks is then performed through a visiting algorithm, typical of matching problems. The specifics of the algorithm can be found in greater details in the final report, and theoretically assure the best possible matching for the tracks.
+
+* Tracks are then classified according to their status. For each matched track the filtered or predicted position is then saved as the track true position.
+
+*  Active and Pending (represented object that are likely to be temporarily occluded) tracks are propagated using the filter, with a simple but effective motion model with constant acceleration.
+
+## Results
 
 * Consider the general case in which one needs to learn the joint pricing and bidding strategy. Do not discriminate over the customers’ classes both for advertising and pricing.
 Then repeat the same when instead discriminating over the customers’ classes for pricing. In doing that, adopt the context structure already discovered.
@@ -67,7 +101,7 @@ You can find all the Python files divided for each point and the .pdf of the fin
 
 ## Team
 
-- Manuel Bressan [[Github](https://github.com/manubre98)] [[Email](mailto:manuel.bressan@mail.polimi.it)]
 - Davide Carrara [[Github](https://github.com/davidecarrara98)] [[Email](mailto:davide1.carrara@mail.polimi.it)]
-- Filippo Tombari [[Email](mailto:filippo.tombari@mail.polimi.it)]
-- Daniela Zanotti [[Github](https://github.com/DanielaZanotti)] [[Email](mailto:daniela1.zanotti@mail.polimi.it)]
+- Lupo Marsigli [[Github](https://github.com/LupoMarsigli)] [[Email](mailto:lupo.marsigli@mail.polimi.it)]
+- Francesco Romeo [[Github](https://github.com/fraromeo)] [[Email](mailto:francesco5.romeo@mail.polimi.it)]
+- Valentina Sgarbossa [[Github](https://github.com/vale9888)] [[Email](mailto:valentina.sgarbossa@mail.polimi.it)]
