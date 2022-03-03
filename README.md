@@ -84,12 +84,7 @@ The main protagonist of the tracker is the Kalman Filter, which is used to predi
 
 ## Results
 
-* Consider the general case in which one needs to learn the joint pricing and bidding strategy. Do not discriminate over the customers’ classes both for advertising and pricing.
-Then repeat the same when instead discriminating over the customers’ classes for pricing. In doing that, adopt the context structure already discovered.
-
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/91596609/140612800-b5b738bf-853c-4986-ba95-b5f7e4850c42.jpg" width="850" alt="princing no seasonal"/>
-</p>
+WIP
 
 ## Resources
 
