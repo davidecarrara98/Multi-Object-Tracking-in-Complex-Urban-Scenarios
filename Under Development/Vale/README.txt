@@ -1,1 +1,0 @@
-Folder for Vale's Code
