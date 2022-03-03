@@ -12,7 +12,7 @@ Accurate tracking in complex urban scenarios is crucial for safety applications 
 Despite a well-established theoretical framework for object tracking, various challenges need to be addressed in a real context, including sensor noise, occlusions and asynchronous measures from multiple sensor.
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/65012600/156656541-b67bae2f-84c6-4e3e-bb6f-cfbc79a1f1ea.png" width="400" alt="Scenario"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156662571-94045f37-6ab2-41c2-b989-3fb911840af1.png" width="400" alt="Scenario"/>
 </p>
 
 
