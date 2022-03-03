@@ -1,25 +1,22 @@
 # Multi Object Tracking in Complex Urban Scenarios - Project Course in Mathematical Modelling
 
 <p align="center">
-    <img src="https://user-images.githubusercontent.com/65012600/156656541-b67bae2f-84c6-4e3e-bb6f-cfbc79a1f1ea.png" width="180" alt="Viscando"/>
-    <img src="https://user-images.githubusercontent.com/65012600/156658116-93891be7-299e-4d87-89bb-c465d62588c2.png" width="180" alt="Chalmers"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156659204-10fb924f-f431-4f92-bcf1-ba12afb381b2.png" width="180" alt="Chalmers"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156658116-93891be7-299e-4d87-89bb-c465d62588c2.png" width="220" alt="Viscando"/>
 </p>
 
 ## Overview
 
-Consider the scenario in which advertisement is used to attract users on an ecommerce website and the users, after the purchase of the first unit of a consumable item, will buy additional units of the same item in future. The goal is to find the best joint bidding and pricing strategy taking into account future purchases.
+Object tracking is the process of detecting and following moving entities in subsequent observations from multiple sensors.
+Accurate tracking in complex urban scenarios is crucial for safety applications such as accident mitigation, predictive traffic control and design of safer infrastructure.
+Despite a well-established theoretical framework for object tracking, various challenges need to be addressed in a real context, including sensor noise, occlusions and asynchronous measures from multiple sensor.
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/65012600/156656541-b67bae2f-84c6-4e3e-bb6f-cfbc79a1f1ea.png" width="400" alt="Scenario"/>
 </p>
 
 
-Imagine a consumable item (for which we have an infinite number of units) and two binary features. Imagine three classes of customers C1, C2, C3, each corresponding to a subspace of the features’ space. Each customers’ class is characterized by:
-* a stochastic number of daily clicks of new users (i.e., that have never clicked before these ads) as a function depending on the bid;
-* a stochastic cost per click as a function of the bid;
-* a conversion rate function providing the probability that a user will buy the item given a price;
-* a distribution probability over the number of times the user will come back to the ecommerce website to buy that item by 30 days after the first purchase (and simulate such visits in future).
-
+Viscando uses proprietary stereovision sensors to extract detailed traffic movement information in critical urban settings, and algorithms to produce insights on mobility risks, communicate real-time safety information and study traffic scenarios and behavior models. One key feature of these vision tools is the ability to correctly identify and locate objects, and track their movement in consecutive measurements or partially overlapping views. The aim of the present work is to provide an algorithm to unify detections into tracks, with a focus on accuracy and smoothness of the output, as well as providing a flexible implementation that may easily be modified and re-used.
 
 ## General Problem
 
