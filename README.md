@@ -2,7 +2,7 @@
 
 <p align="center">
     <img src="https://user-images.githubusercontent.com/65012600/156656541-b67bae2f-84c6-4e3e-bb6f-cfbc79a1f1ea.png" width="180" alt="Viscando"/>
-    <img src="https://user-images.githubusercontent.com/65012600/156656541-b67bae2f-84c6-4e3e-bb6f-cfbc79a1f1ea.png" width="180" alt="Chalmers"/>
+    <img src="https://user-images.githubusercontent.com/65012600/156658116-93891be7-299e-4d87-89bb-c465d62588c2.png" width="180" alt="Chalmers"/>
 </p>
 
 ## Overview
