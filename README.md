@@ -87,12 +87,8 @@ The main protagonist of the tracker is the Kalman Filter, which is used to predi
 WIP
 
 ## Resources
-
-You can find all the Python files divided for each point and the .pdf of the final report:
-- The pdf file contains the presentation of the project where you can find our final plots and all the results obtained.
-- ```P3``` and ```P4``` contains all the files related to the Pricing Part.
-- ```P5``` contains all the files related to the Bidding Part.
-- ```P6``` and ```P7``` contains all the files related to the joint Pricing and Bidding part.
+- ```Main.ipynb``` is the Jupyter Notebook containing all the work of the project. The results are displayed, but the code cannot be used since the data are private.
+- ```Final Report``` is the pdf of the final report of the project. It contains detailed information on every step of the algorithm, a more accurate analysis of challenges and results and some theoretical insights.
 
 ## Team
 
