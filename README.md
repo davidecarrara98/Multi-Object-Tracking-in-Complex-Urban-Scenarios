@@ -84,7 +84,18 @@ The main protagonist of the tracker is the Kalman Filter, which is used to predi
 
 ## Results
 
-WIP
+The final result of the algorith consisted in 154 identified tracks, with 198 detections linked in the longest one. 210 tracks were instead removed, since deemed irrelevant by the tracker. In the following picture there is an overview of the obtained tracks, where the shape of the roundabout is clearly visible.
+
+<p align="center">
+    <img width="398" alt="overview" src="https://user-images.githubusercontent.com/65012600/157850867-0ed2add4-a65c-4566-8cbd-78d59654d050.png", alt = 'overview'>
+</p>
+
+Two examples of tracks are reported in the figure below, one corresponding to a vehicle moving around all the roundabout, the second to a pedestrian crossing the road. Both tracks are a good example of the tracking properties of the algorithm. More insights about these tracks, and analyses of the velocities are provided in the report.
+<p align="center">
+    <img width="200" alt="long track" src="https://user-images.githubusercontent.com/65012600/157852358-016e88af-ca1a-40bb-9f75-0fc524eaf526.png", alt = "long">
+    <img width="200" alt="pedestrian" src="https://user-images.githubusercontent.com/65012600/157853391-efe11047-0f15-46ce-a19d-77c44828a49b.png", alt = "pedestrian">
+
+</p>
 
 ## Resources
 - ```Main.ipynb``` is the Jupyter Notebook containing all the work of the project. The results are displayed, but the code cannot be used since the data are private.
