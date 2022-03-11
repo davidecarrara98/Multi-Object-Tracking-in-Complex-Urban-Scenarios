@@ -94,7 +94,7 @@ Two examples of tracks are reported in the figure below, one corresponding to a 
 
 <p align="center">
     <img width="200" alt="long track" src="https://user-images.githubusercontent.com/65012600/157852358-016e88af-ca1a-40bb-9f75-0fc524eaf526.png", alt = "long">
-    <img width="300" alt="pedestrian" src="https://user-images.githubusercontent.com/65012600/157853391-efe11047-0f15-46ce-a19d-77c44828a49b.png", alt = "pedestrian">
+    <img width="250" alt="pedestrian" src="https://user-images.githubusercontent.com/65012600/157853391-efe11047-0f15-46ce-a19d-77c44828a49b.png", alt = "pedestrian">
 </p>
 
 The main challenge consist in the presence of large vehicles, which are usually detected multiple times by the same sensor, leading in this way to multiple tracks, as shown in the picture below.
@@ -109,6 +109,15 @@ The comparison between the final result of our online tracker and the offline be
    <img width="395" alt="comparison" src="https://user-images.githubusercontent.com/65012600/157855780-209b7425-a113-4b2f-847e-c22502d6f8f0.png">
 </p>
 
+## Merging Algorithm
+
+One possible notable improvement consists in developing a merging algorithm, able to detect complete tracks related to the same object and join them. We developed such an algorithm, but we had the time to implement it only as an offline instrument. The merging algorith works by propagating all tracks for 20 frames, thanks to the Kalman Filter, and then comparing all the couple of tracks in terms of mean distance, mean difference iin velocity and mean angle (computed via scalar product of velocities). Tracks respecting particular conditions on this values are then merged. One example of proposed merging is shown in the last figure.
+
+<p align="center">
+   <img width="304" alt="merge" src="https://user-images.githubusercontent.com/65012600/157868538-06887b79-a9dd-4fb6-a8a0-40457140d9a2.png">
+</p>
+
+More analysis on the results of our algorithm, its pros and cons and further improvements are presented in the report.
 
 ## Resources
 - ```Main.ipynb``` is the Jupyter Notebook containing all the work of the project. The results are displayed, but the code cannot be used since the data are private.
